@@ -11,6 +11,7 @@ import urllib2
 from bs4 import BeautifulSoup
 
 def removeTags(parsedString, textToStrip):
+
 	 finalValue = parsedString.text.strip(textToStrip)
 	 return finalValue
 
@@ -18,20 +19,22 @@ def parsePage(pageURL, parsedLine):
 
 	page = urllib2.urlopen(pageURL)
 	soup = BeautifulSoup(page, 'html.parser')
-	parsedString = soup.find(id="qwidget_lastsale")
+	parsedString = soup.find(id=parsedLine)
 	return parsedString
 
 def main():
 
 	sStockName = raw_input("Enter the name of the stock: ")
 	urlPage = "http://www.nasdaq.com/symbol/%s" % sStockName
+
+	#Current Market Price
+	stockMarketPrice = "qwidget_lastsale"
+	textToStrip = "<div class=\"qwidget-dollar\" id=\"qwidget_lastsale\"><div>"
 	
-	parsedLine = "aed"
-	#parsedLine = "id=\"qwidget_lastsale\""
-	textToStrip = "<div class=\"qwidget-dollar\" id=\"qwidget_lastsale\">"
-	
-	finalString = removeTags(parsePage(urlPage, parsedLine), textToStrip)
-	print(finalString)
+
+	#prints stock's current market price
+	finalString = removeTags(parsePage(urlPage, stockMarketPrice), textToStrip)
+	print("Current Market Price Per Share: " + finalString)
 
 if __name__ == "__main__":
 	main()
