@@ -38,19 +38,3 @@ def main():
 
 if __name__ == "__main__":
 	main()
-
-
-
-"""
-import urllib2
-from bs4 import BeautifulSoup
-
-
-
-
-
-priceDivTag = soup.find(id="qwidget_lastsale")
-priceValue = priceDivTag.text.strip("<div class=\"qwidget-dollar\" id=\"qwidget_lastsale\">")
-
-print (priceValue)
-"""
